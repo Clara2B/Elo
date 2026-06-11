@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 240 240" role="img" aria-label="Elo - Estética Avançada">
+  <defs>
+    <linearGradient id="goldGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#F0DDB0"/>
+      <stop offset="50%" stop-color="#CDA86A"/>
+      <stop offset="100%" stop-color="#B5894E"/>
+    </linearGradient>
+  </defs>
+  <circle cx="120" cy="84" r="58" fill="none" stroke="url(#goldGrad)" stroke-width="11"/>
+  <circle cx="120" cy="84" r="36" fill="none" stroke="url(#goldGrad)" stroke-width="10"/>
+  <text x="120" y="208" font-family="'Playfair Display', Georgia, serif" font-size="72" font-weight="700" letter-spacing="6" fill="url(#goldGrad)" text-anchor="middle">ELO</text>
+</svg>
