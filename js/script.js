@@ -27,6 +27,20 @@ tabButtons.forEach(btn => {
   });
 });
 
+// Accordion for "Sobre" info cards (mobile only, via CSS)
+const infoCards = document.querySelectorAll('.info-card');
+infoCards.forEach(card => {
+  card.setAttribute('aria-expanded', 'false');
+  card.addEventListener('click', () => {
+    const isOpen = card.classList.contains('open');
+    infoCards.forEach(c => { c.classList.remove('open'); c.setAttribute('aria-expanded', 'false'); });
+    if (!isOpen) {
+      card.classList.add('open');
+      card.setAttribute('aria-expanded', 'true');
+    }
+  });
+});
+
 // Contact form -> opens WhatsApp with prefilled message
 const WHATSAPP_LINK = 'https://wa.me/message/BHLFEAG3KLSXL1';
 

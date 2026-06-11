@@ -16,7 +16,7 @@
 
 * { margin: 0; padding: 0; box-sizing: border-box; }
 
-html { scroll-behavior: smooth; }
+html { scroll-behavior: smooth; overflow-x: hidden; }
 
 body {
   font-family: 'Poppins', sans-serif;
@@ -24,6 +24,8 @@ body {
   background: var(--cream);
   line-height: 1.6;
   font-weight: 300;
+  overflow-x: hidden;
+  width: 100%;
 }
 
 h1, h2, h3, h4 {
@@ -453,6 +455,10 @@ img { max-width: 100%; display: block; }
   color: var(--text-muted);
 }
 
+.info-toggle {
+  display: none;
+}
+
 /* ---------- Tabs (Serviços) ---------- */
 .tabs-nav {
   display: flex;
@@ -571,23 +577,53 @@ img { max-width: 100%; display: block; }
 }
 
 .journey-card {
+  position: relative;
   display: flex;
   flex-direction: column;
   background: #fff;
   border-radius: var(--radius);
-  padding: 40px 32px;
+  padding: 44px 32px 36px;
   box-shadow: var(--shadow);
-  border: 1px solid rgba(47,69,68,0.05);
-  transition: transform var(--transition);
+  border: 2px solid rgba(47,69,68,0.06);
+  border-top: 4px solid var(--teal);
+  transition: transform var(--transition), box-shadow var(--transition), border-color var(--transition);
 }
-.journey-card:hover { transform: translateY(-6px); }
+.journey-card:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 16px 40px rgba(47, 69, 68, 0.16);
+  border-color: var(--teal);
+}
 
 .journey-card.featured {
-  border: 1px solid var(--gold);
+  border: 2px solid var(--gold);
+  border-top: 4px solid var(--gold);
   background: linear-gradient(180deg, #fff 0%, var(--cream-2) 100%);
-  transform: scale(1.03);
+  box-shadow: 0 20px 50px rgba(205, 168, 106, 0.28);
+  transform: scale(1.05);
+  z-index: 1;
 }
-.journey-card.featured:hover { transform: scale(1.03) translateY(-6px); }
+.journey-card.featured:hover {
+  transform: scale(1.05) translateY(-6px);
+  box-shadow: 0 24px 56px rgba(205, 168, 106, 0.38);
+  border-color: var(--gold);
+}
+
+.plan-badge {
+  position: absolute;
+  top: -14px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: linear-gradient(135deg, var(--gold-light), var(--gold));
+  color: var(--teal-darker);
+  font-size: 0.72rem;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  padding: 7px 18px;
+  border-radius: 999px;
+  box-shadow: 0 6px 16px rgba(205, 168, 106, 0.4);
+  white-space: nowrap;
+}
 
 .journey-step {
   display: inline-block;
@@ -598,18 +634,20 @@ img { max-width: 100%; display: block; }
   color: var(--teal-darker);
   margin-bottom: 12px;
 }
+.journey-card.featured .journey-step { color: var(--gold); }
 
 .plan-price {
   font-family: 'Playfair Display', serif;
-  font-size: 2.6rem;
+  font-size: 3rem;
   font-weight: 700;
+  letter-spacing: 0.01em;
   color: var(--teal-darker);
   margin-bottom: 12px;
   line-height: 1;
 }
 .plan-currency {
-  font-size: 1.1rem;
-  font-weight: 500;
+  font-size: 1.2rem;
+  font-weight: 600;
   vertical-align: super;
   margin-right: 2px;
 }
@@ -618,6 +656,12 @@ img { max-width: 100%; display: block; }
   font-size: 0.95rem;
   font-weight: 400;
   color: var(--text-muted);
+}
+.journey-card.featured .plan-price {
+  background: linear-gradient(135deg, var(--gold) 0%, #B5894E 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
 }
 
 .journey-card > p {
@@ -773,13 +817,80 @@ img { max-width: 100%; display: block; }
   }
   .hero-ring { display: none; }
 
-  .about-grid { grid-template-columns: 1fr; gap: 24px; text-align: center; }
+  /* Sobre: drop the photo, keep the graphic shapes behind the text */
+  .about-grid { grid-template-columns: 1fr; gap: 24px; text-align: center; position: relative; }
   .about-text .section-title,
   .about-text .section-lead,
   .about-text .eyebrow { text-align: center; margin-left: auto; margin-right: auto; }
-  .about-media { padding: 24px; justify-content: center; }
-  .about-media img { max-width: 280px; }
-  .about-badge { left: 50%; transform: translateX(-50%); bottom: -10px; }
+  .about-text { position: relative; z-index: 1; }
+  .about-media {
+    position: absolute;
+    inset: -8% -6%;
+    padding: 0;
+    z-index: 0;
+    pointer-events: none;
+  }
+  .about-media img,
+  .about-badge { display: none; }
+
+  /* Sobre: cards become an accordion (title + icon, tap to expand) */
+  .info-card {
+    text-align: left;
+    padding: 22px 24px;
+    cursor: pointer;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 0 16px;
+  }
+  .info-card:hover { transform: none; }
+  .info-icon { width: 40px; height: 40px; margin: 0; flex-shrink: 0; }
+  .info-card h3 {
+    flex: 1;
+    margin-bottom: 0;
+    font-size: 1.05rem;
+  }
+  .info-toggle {
+    display: block;
+    width: 18px;
+    height: 18px;
+    color: var(--gold);
+    transition: transform var(--transition);
+  }
+  .info-toggle svg { width: 100%; height: 100%; }
+  .info-card.open .info-toggle { transform: rotate(180deg); }
+  .info-card p {
+    flex-basis: 100%;
+    display: none;
+    margin-top: 14px;
+    padding-left: 56px;
+    text-align: left;
+  }
+  .info-card.open p { display: block; }
+
+  /* Serviços: scrollable tab pills */
+  .tabs-nav {
+    flex-wrap: nowrap;
+    justify-content: flex-start;
+    overflow-x: auto;
+    padding-bottom: 12px;
+    margin: 0 -24px 36px;
+    padding-left: 24px;
+    padding-right: 24px;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
+  }
+  .tabs-nav::-webkit-scrollbar { display: none; }
+  .tab-btn { flex: 0 0 auto; }
+  .tab-panel { grid-template-columns: 1fr; gap: 16px; }
+  .service-group { padding: 22px 20px; }
+
+  /* Clube Elo: avoid overflow from the featured card scaling */
+  .journey-grid { gap: 20px; }
+  .journey-card { padding: 32px 26px; }
+  .journey-card.featured { transform: none; }
+  .journey-card.featured:hover { transform: translateY(-6px); }
+  .plan-price { font-size: 2.2rem; }
 }
 
 @media (max-width: 600px) {
@@ -787,4 +898,8 @@ img { max-width: 100%; display: block; }
   .hero { min-height: auto; padding: 80px 0; }
   .hero-actions { flex-direction: column; align-items: stretch; }
   .hero-actions .btn { width: 100%; }
+
+  /* Hero: trim copy for a cleaner mobile view */
+  .hero-subtitle { display: none; }
+  .hero h1 { margin-bottom: 28px; }
 }
