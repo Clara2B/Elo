@@ -903,7 +903,7 @@ img { max-width: 100%; display: block; }
   gap: 16px;
   color: var(--text-dark);
 }
-.contact-form h3 { margin-bottom: 4px; }
+.contact-form h3 { margin-bottom: 4px; color: var(--teal-darker); }
 .contact-form label {
   display: flex;
   flex-direction: column;
