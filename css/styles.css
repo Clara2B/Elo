@@ -638,24 +638,30 @@ img { max-width: 100%; display: block; }
 
 .plan-price {
   font-family: 'Playfair Display', serif;
-  font-size: 3rem;
-  font-weight: 700;
+  font-size: calc(5.4rem - 5px);
+  font-weight: 800;
   letter-spacing: 0.01em;
   color: var(--teal-darker);
   margin-bottom: 12px;
   line-height: 1;
 }
 .plan-currency {
-  font-size: 1.2rem;
-  font-weight: 600;
+  font-size: 1.1rem;
+  font-weight: 700;
   vertical-align: super;
   margin-right: 2px;
 }
 .plan-period {
   font-family: 'Poppins', sans-serif;
-  font-size: 0.95rem;
+  font-size: 1rem;
   font-weight: 400;
   color: var(--text-muted);
+}
+.journey-card.plan-essencial .plan-price {
+  background: linear-gradient(135deg, var(--teal) 0%, var(--teal-darker) 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
 }
 .journey-card.featured .plan-price {
   background: linear-gradient(135deg, var(--gold) 0%, #B5894E 100%);
@@ -663,8 +669,14 @@ img { max-width: 100%; display: block; }
   background-clip: text;
   color: transparent;
 }
+.journey-card.plan-diamond .plan-price {
+  background: linear-gradient(135deg, var(--gold-light) 0%, var(--gold) 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
 
-.journey-card > p {
+.journey-card > p:not([class]) {
   color: var(--text-muted);
   font-size: 0.92rem;
   margin-bottom: 20px;
@@ -679,6 +691,173 @@ img { max-width: 100%; display: block; }
   border-top: 1px solid rgba(47,69,68,0.06);
 }
 .journey-card ul li:first-child { border-top: none; }
+
+/* ---------- Clube Elo: plan cards ---------- */
+.plans-grid { align-items: stretch; }
+
+.plan-card { padding: 40px 30px 32px; }
+
+.plan-tagline {
+  color: var(--text-muted);
+  font-size: 0.92rem;
+  font-style: italic;
+  margin-bottom: 18px;
+}
+
+.plan-included {
+  font-family: 'Poppins', sans-serif;
+  font-size: 0.78rem;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+  margin-bottom: 10px;
+}
+
+.plan-items {
+  margin-bottom: 24px;
+}
+.plan-items li {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  font-size: 0.9rem;
+  padding: 9px 0;
+  border-top: 1px solid rgba(47,69,68,0.06);
+}
+.plan-items li:first-child { border-top: none; }
+.plan-items li small {
+  display: block;
+  color: var(--text-muted);
+  font-size: 0.8rem;
+  margin-top: 2px;
+}
+.plan-item-icon {
+  flex-shrink: 0;
+  width: 26px;
+  height: 26px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--cream-2);
+  color: var(--teal-dark);
+  margin-top: 1px;
+}
+.plan-item-icon svg { width: 15px; height: 15px; }
+
+.plan-credit {
+  background: var(--cream-2);
+  border-radius: var(--radius);
+  padding: 20px 22px;
+  margin-bottom: 24px;
+}
+.plan-credit h5 {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-family: 'Playfair Display', serif;
+  font-size: 1rem;
+  font-weight: 600;
+  color: var(--teal-darker);
+  margin-bottom: 14px;
+}
+.plan-credit-icon { width: 18px; height: 18px; color: var(--gold); flex-shrink: 0; }
+.plan-credit-icon svg { width: 100%; height: 100%; }
+.credit-options {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 14px;
+  text-align: center;
+}
+.credit-option {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+.credit-label {
+  font-size: 0.74rem;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--text-muted);
+}
+.credit-value {
+  font-family: 'Playfair Display', serif;
+  font-size: 1.4rem;
+  font-weight: 800;
+  color: var(--teal-darker);
+  letter-spacing: 0.01em;
+  white-space: nowrap;
+}
+.credit-suffix { font-size: 0.78rem; color: var(--text-muted); }
+.credit-note {
+  margin-top: 12px;
+  font-size: 0.78rem;
+  color: var(--text-muted);
+  text-align: center;
+}
+
+.plan-extra {
+  display: flex;
+  align-items: flex-start;
+  gap: 14px;
+  background: linear-gradient(135deg, var(--gold-light), var(--cream-2));
+  border-radius: var(--radius);
+  padding: 18px 20px;
+  margin-bottom: 24px;
+}
+.plan-extra-icon {
+  flex-shrink: 0;
+  width: 30px;
+  height: 30px;
+  color: var(--gold);
+}
+.plan-extra-icon svg { width: 100%; height: 100%; }
+.plan-extra strong {
+  display: block;
+  font-family: 'Playfair Display', serif;
+  font-size: 0.98rem;
+  color: var(--teal-darker);
+  margin-bottom: 4px;
+}
+.plan-extra p {
+  font-size: 0.85rem;
+  color: var(--text-muted);
+}
+
+/* Diamond: dark premium variant */
+.journey-card.plan-diamond {
+  background: linear-gradient(180deg, var(--teal-darker) 0%, #233634 100%);
+  border: 2px solid var(--gold);
+  border-top: 4px solid var(--gold);
+}
+.plan-diamond .journey-step,
+.plan-diamond .plan-included { color: var(--gold); }
+.plan-diamond .plan-tagline,
+.plan-diamond .credit-label,
+.plan-diamond .credit-suffix,
+.plan-diamond .credit-note,
+.plan-diamond .plan-items li small { color: rgba(246, 242, 234, 0.6); }
+.plan-diamond .plan-price,
+.plan-diamond .credit-value { color: var(--text-light); }
+.plan-diamond .plan-period { color: rgba(246, 242, 234, 0.55); }
+.plan-diamond .plan-items li { color: var(--text-light); border-top-color: rgba(246, 242, 234, 0.1); }
+.plan-diamond .plan-item-icon {
+  background: rgba(205, 168, 106, 0.15);
+  color: var(--gold);
+}
+.plan-diamond .plan-credit { background: rgba(246, 242, 234, 0.06); }
+.plan-diamond .plan-credit h5 { color: var(--gold-light); }
+
+.plan-extra-dark {
+  background: linear-gradient(135deg, rgba(205, 168, 106, 0.22), rgba(205, 168, 106, 0.08));
+}
+.plan-diamond .plan-extra strong { color: var(--gold-light); }
+.plan-diamond .plan-extra p { color: rgba(246, 242, 234, 0.75); }
+
+@media (max-width: 1024px) {
+  .journey-card.plan-diamond { transform: none; }
+}
 
 /* ---------- Contato ---------- */
 .contact-grid {
@@ -890,7 +1069,7 @@ img { max-width: 100%; display: block; }
   .journey-card { padding: 32px 26px; }
   .journey-card.featured { transform: none; }
   .journey-card.featured:hover { transform: translateY(-6px); }
-  .plan-price { font-size: 2.2rem; }
+  .plan-price { font-size: 3rem; }
 }
 
 @media (max-width: 600px) {
@@ -902,4 +1081,27 @@ img { max-width: 100%; display: block; }
   /* Hero: trim copy for a cleaner mobile view */
   .hero-subtitle { display: none; }
   .hero h1 { margin-bottom: 28px; }
+
+  /* Clube Elo: refined, centered header for mobile cards */
+  .plans-grid { gap: 36px; }
+  .plan-card {
+    padding: 36px 22px 28px;
+    border-radius: 20px;
+    text-align: center;
+  }
+  .plan-card .journey-step { font-size: 1.5rem; }
+  .plan-card .plan-tagline { margin-bottom: 20px; }
+  .plan-price { font-size: 3.2rem; margin-bottom: 20px; }
+  .plan-included,
+  .plan-items,
+  .plan-credit,
+  .plan-extra { text-align: left; }
+  .plan-included {
+    text-align: center;
+    padding-bottom: 12px;
+    margin-bottom: 16px;
+    border-bottom: 1px solid rgba(47,69,68,0.08);
+  }
+  .plan-diamond .plan-included { border-bottom-color: rgba(246, 242, 234, 0.12); }
+  .credit-options { gap: 10px; }
 }
