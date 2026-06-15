@@ -41,6 +41,13 @@ infoCards.forEach(card => {
   });
 });
 
+// Clube Elo: cards expand on tap (mobile)
+document.querySelectorAll('.plan-card').forEach(card => {
+  card.querySelector('.plan-summary').addEventListener('click', () => {
+    card.classList.toggle('expanded');
+  });
+});
+
 // Contact form -> opens WhatsApp with prefilled message
 const WHATSAPP_LINK = 'https://wa.me/message/BHLFEAG3KLSXL1';
 

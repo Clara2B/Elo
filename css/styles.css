@@ -16,7 +16,7 @@
 
 * { margin: 0; padding: 0; box-sizing: border-box; }
 
-html { scroll-behavior: smooth; overflow-x: hidden; }
+html { scroll-behavior: smooth; overflow-x: hidden; width: 100%; position: relative; }
 
 body {
   font-family: 'Poppins', sans-serif;
@@ -294,6 +294,7 @@ img { max-width: 100%; display: block; }
   color: var(--text-light);
   position: relative;
   overflow: hidden;
+  transform: translateZ(0);
 }
 .section-dark .container { position: relative; z-index: 1; }
 
@@ -348,15 +349,20 @@ img { max-width: 100%; display: block; }
 .about-grid {
   display: grid;
   grid-template-columns: 0.95fr 1.05fr;
-  gap: 64px;
-  align-items: center;
+  grid-template-rows: auto auto;
+  gap: 20px 64px;
+  align-items: start;
   margin-bottom: 80px;
 }
+.about-media { grid-row: 1 / 3; align-self: center; }
+.about-text { grid-column: 2; grid-row: 1; }
+.about-grid .cards-grid { grid-column: 2; grid-row: 2; }
 .about-text .section-title,
 .about-text .section-lead {
   text-align: left;
   margin-left: 0;
 }
+.about-text .section-lead { margin-bottom: 0; }
 .about-text .eyebrow { text-align: left; }
 
 .about-media {
@@ -383,17 +389,6 @@ img { max-width: 100%; display: block; }
   z-index: 0;
 }
 
-/* offset outline ring, echoing the brand mark */
-.about-ring {
-  position: absolute;
-  width: 64%;
-  height: 64%;
-  border: 1px solid var(--gold);
-  border-radius: 50%;
-  top: -6%;
-  right: 4%;
-  z-index: 0;
-}
 
 /* floating info badge overlapping the image */
 .about-badge {
@@ -424,14 +419,14 @@ img { max-width: 100%; display: block; }
 /* ---------- Cards (Sobre) ---------- */
 .cards-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
-  gap: 28px;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 18px;
 }
 
 .info-card {
   background: #fff;
   border-radius: var(--radius);
-  padding: 36px 28px;
+  padding: 22px 18px;
   box-shadow: var(--shadow);
   text-align: center;
   transition: transform var(--transition);
@@ -439,19 +434,19 @@ img { max-width: 100%; display: block; }
 .info-card:hover { transform: translateY(-6px); }
 
 .info-icon {
-  width: 56px;
-  height: 56px;
-  margin: 0 auto 20px;
+  width: 38px;
+  height: 38px;
+  margin: 0 auto 12px;
   color: var(--gold);
 }
 .info-icon svg { width: 100%; height: 100%; }
 
 .info-card h3 {
-  font-size: 1.2rem;
-  margin-bottom: 10px;
+  font-size: 1rem;
+  margin-bottom: 6px;
 }
 .info-card p {
-  font-size: 0.92rem;
+  font-size: 0.84rem;
   color: var(--text-muted);
 }
 
@@ -510,6 +505,7 @@ img { max-width: 100%; display: block; }
   padding: 28px 24px;
   position: relative;
   overflow: hidden;
+  transform: translateZ(0);
   transition: transform var(--transition), border-color var(--transition), background var(--transition);
 }
 .service-group::before {
@@ -696,6 +692,17 @@ img { max-width: 100%; display: block; }
 .plans-grid { align-items: stretch; }
 
 .plan-card { padding: 40px 30px 32px; }
+
+.plan-toggle {
+  display: none;
+  width: 22px;
+  height: 22px;
+  margin: 4px auto 0;
+  color: var(--gold);
+  transition: transform var(--transition);
+}
+.plan-toggle svg { width: 100%; height: 100%; }
+.plan-diamond .plan-toggle { color: var(--gold-light); }
 
 .plan-tagline {
   color: var(--text-muted);
@@ -997,17 +1004,19 @@ img { max-width: 100%; display: block; }
   .hero-ring { display: none; }
 
   /* Sobre: drop the photo, keep the graphic shapes behind the text */
-  .about-grid { grid-template-columns: 1fr; gap: 24px; text-align: center; position: relative; }
+  .about-grid { grid-template-columns: 1fr; grid-template-rows: auto; gap: 24px; text-align: center; position: relative; }
   .about-text .section-title,
   .about-text .section-lead,
   .about-text .eyebrow { text-align: center; margin-left: auto; margin-right: auto; }
-  .about-text { position: relative; z-index: 1; }
+  .about-text { position: relative; z-index: 1; grid-column: 1; grid-row: auto; }
+  .about-grid .cards-grid { grid-column: 1; grid-row: auto; grid-template-columns: 1fr; }
   .about-media {
     position: absolute;
     inset: -8% -6%;
     padding: 0;
     z-index: 0;
     pointer-events: none;
+    grid-row: auto;
   }
   .about-media img,
   .about-badge { display: none; }
@@ -1104,4 +1113,20 @@ img { max-width: 100%; display: block; }
   }
   .plan-diamond .plan-included { border-bottom-color: rgba(246, 242, 234, 0.12); }
   .credit-options { gap: 10px; }
+
+  /* Clube Elo: cards collapsed by default on mobile, tap to expand */
+  .plan-card { cursor: pointer; }
+  .plan-card .plan-price { margin-bottom: 0; }
+  .plan-toggle { display: block; }
+  .plan-card.expanded .plan-toggle { transform: rotate(180deg); }
+  .plan-details {
+    overflow: hidden;
+    max-height: 0;
+    margin-top: 0;
+    transition: max-height 0.35s ease;
+  }
+  .plan-card.expanded .plan-details {
+    max-height: 2000px;
+    margin-top: 24px;
+  }
 }
