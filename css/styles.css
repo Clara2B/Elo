@@ -579,6 +579,7 @@ img { max-width: 100%; display: block; }
   grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
   gap: 28px;
 }
+.journey-grid > *, .cards-grid > * { min-width: 0; }
 
 .journey-card {
   position: relative;
@@ -882,6 +883,7 @@ img { max-width: 100%; display: block; }
   align-items: start;
   margin-bottom: 56px;
 }
+.contact-grid > * { min-width: 0; }
 
 .contact-details {
   margin: 32px 0;
@@ -938,6 +940,9 @@ img { max-width: 100%; display: block; }
   background: #fff;
   color: var(--text-dark);
   resize: vertical;
+  width: 100%;
+  min-width: 0;
+  box-sizing: border-box;
 }
 .contact-form input:focus,
 .contact-form select:focus,
