@@ -16,7 +16,14 @@
 
 * { margin: 0; padding: 0; box-sizing: border-box; }
 
-html { scroll-behavior: smooth; overflow-x: hidden; width: 100%; position: relative; }
+html {
+  scroll-behavior: smooth;
+  overflow-x: hidden;
+  width: 100%;
+  position: relative;
+  -webkit-text-size-adjust: 100%;
+  text-size-adjust: 100%;
+}
 
 body {
   font-family: 'Poppins', sans-serif;
@@ -26,6 +33,7 @@ body {
   font-weight: 300;
   overflow-x: hidden;
   width: 100%;
+  overflow-wrap: break-word;
 }
 
 h1, h2, h3, h4 {
@@ -294,7 +302,6 @@ img { max-width: 100%; display: block; }
   color: var(--text-light);
   position: relative;
   overflow: hidden;
-  clip-path: inset(0);
   transform: translateZ(0);
 }
 .section-dark .container { position: relative; z-index: 1; }
