@@ -878,10 +878,11 @@ img { max-width: 100%; display: block; }
 /* ---------- Contato ---------- */
 .contact-grid {
   display: grid;
-  grid-template-columns: 1.1fr 0.9fr;
+  grid-template-columns: minmax(0, 1.1fr) minmax(0, 0.9fr);
   gap: 64px;
   align-items: start;
   margin-bottom: 56px;
+  max-width: 100%;
 }
 .contact-grid > * { min-width: 0; }
 
