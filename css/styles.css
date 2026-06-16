@@ -294,11 +294,12 @@ img { max-width: 100%; display: block; }
   color: var(--text-light);
   position: relative;
   overflow: hidden;
+  clip-path: inset(0);
   transform: translateZ(0);
 }
 .section-dark .container { position: relative; z-index: 1; }
 
-/* decorative background rings + glow for dark sections */
+/* decorative background rings — kept within element bounds to avoid mobile overflow */
 .section-dark::before,
 .section-dark::after {
   content: "";
@@ -312,13 +313,13 @@ img { max-width: 100%; display: block; }
   width: 480px;
   height: 480px;
   top: -220px;
-  right: -160px;
+  right: 0;
 }
 .section-dark::after {
   width: 320px;
   height: 320px;
   bottom: -160px;
-  left: -120px;
+  left: 0;
   border-color: rgba(205, 168, 106, 0.1);
 }
 #servicos {
